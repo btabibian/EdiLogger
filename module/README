@@ -1,0 +1,35 @@
+DOWNLOAD:
+- Download EdiLogger.Common
+- Download EdiLogger.Main
+SETUP:
+- Copy both directories into a single directory
+
+BUILDING:
+The actual module that runs on the robot.
+The module needs to be cross-compiled for the robot, so use the NAO/Geode toolchain for this.
+Replace ~/Progs/NAO/ctc-academics-1.6.0 with the path to your own NAO/Geode toolchain file
+
+To build the module:
+cd EdiLogger/module
+mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=~/Progs/NAO/ctc-academics-1.6.0/toolchain-geode.cmake ..
+make
+
+Use "ccmake ." in the build directory to switch the bulid type from RELEASE to DEBUG for better
+debugging.
+
+RUNNING:
+- Copy produced library to NAO. 
+- Copy Configurattion files to "/home/nao/data/Logger_Config.txt"
+
+CONFIGURATION:
+- Configuration files are shipped with the package.
+- Logger_Config.txt is an ini file. Every entry in the file looks like following:
+  Tag=ALName
+  Tag stands for the name which message will use to deliver the message.
+  Name stands for the name of the variable in ALMemory which logger will copy.
+- Logger_Config.txt should contain an entry "Name" containing the name a name for the agent.
+
+
+

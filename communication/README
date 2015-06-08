@@ -1,0 +1,34 @@
+DOWNLOAD:
+- Download EdiLogger.Common
+- Download EdiLogger.Communication
+SETUP:
+- Copy both directories into a single directory
+
+BUILDING:
+The actual module runs on the robot.
+The module needs to be cross-compiled for the robot, so use the NAO/Geode toolchain for this.
+Replace ~/Progs/NAO/ctc-academics-1.6.0 with the path to your own NAO/Geode toolchain file
+
+To build the module:
+cd EdiLogger/communication
+mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=~/Progs/NAO/ctc-academics-1.6.0/toolchain-geode.cmake ..
+make
+
+Use "ccmake ." in the build directory to switch the bulid type from RELEASE to DEBUG for better
+debugging.
+
+RUNNING:
+- Copy produced library to NAO. 
+- Copy Configurattion files to "/home/nao/data/Comm_Config.txt"
+
+CONFIGURATION:
+- Configuration files are shipped with the package.
+- Comm_Config.txt is an ini file. Every entry in the file looks like following:
+  Port=PortNumber 
+  IP=IPNumber
+  Port number indicates which port module should listen to
+  IP number indicates which IP/HostName should module connect to.
+- Port number for Main Module is 1100.
+
